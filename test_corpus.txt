@@ -1,0 +1,6 @@
+Nancy Amato,UIUC
+Nancy Amato is a professor in department of computer science
+Lawrence Angrave,UIUC
+Lawrence Angrave is a computer science professor
+Kris Hauser,UIUC
+Kris is a computer science professor who graduated from UCB
