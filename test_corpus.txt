@@ -4,3 +4,13 @@ Lawrence Angrave,UIUC
 Lawrence Angrave is a computer science professor
 Kris Hauser,UIUC
 Kris is a computer science professor who graduated from UCB
+Animesh Garg,University of Toronto
+Animesh Garg is a computer science professor at the University of Toronto
+Dan Block,UIUC
+Dan Block is a professor from UIUC in the dapartment of computer science
+Maya Catwak,University of Washington
+Maya Catwak is a computer engineering professor from the University of Washington
+Nancy Wang,Cornell University
+Nancy Wang is a professor from the Cornell University in the department of agriculture
+Kevin Song,UCLA
+Kevin Sone is a computer science professor at UCLA
