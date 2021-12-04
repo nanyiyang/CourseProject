@@ -19,6 +19,6 @@ docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.9.2
 ````
 
 
-Once Docker is running, you can run the search engine by entering
+Once Docker is running, you can run the search engine by running
 `python search.py`
 
