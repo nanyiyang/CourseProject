@@ -36,12 +36,12 @@ def print_helper(query, results, mode, round_of_search):
                     to_return = "Succinct Content Retrieved for Query No " + str(round_of_search) + " : " + query +  "\n\n"
                 if start_2 != None and end_2 != None: 
                     to_return +=       "    " +         "Document " +               str(indx) + ": " + "\n" \
-                                +  "        " +      "abstract 1: " +      context[start:end] + "\n" \
-                                +  "        " +      "abstract 2: " + context[start_2: end_2] + "\n" \
+                                +  "        " +       "summary 1: " +      context[start:end] + "\n" \
+                                +  "        " +       "summary 2: " + context[start_2: end_2] + "\n" \
                                 +  "        " +    "Full context: " +                 context + "\n" 
                 else:
                     to_return +=       "    " +         "Document " +               str(indx) + ": " + "\n" \
-                                +  "        " +      "abstract 1: " +      context[start:end] + "\n" \
+                                +  "        " +       "summary 1: " +      context[start:end] + "\n" \
                                 +  "        " +    "Full context: " +                 context + "\n" 
                     
             
