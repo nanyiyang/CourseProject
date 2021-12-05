@@ -6,6 +6,6 @@ class Reader:
         model = "deepset/roberta-base-squad2"
         self.reader = FARMReader(model, use_gpu=True)
 
-    def predict(self, query, documents, top_k=1):
+    def predict(self, query, documents, top_k=3):
         result = self.reader.predict(query=query, documents=documents, top_k=top_k)
         return result
