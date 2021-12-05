@@ -36,12 +36,12 @@ def print_helper(query, results, mode, round_of_search):
                     to_return = "Succinct Content Retrieved for Query No " + str(round_of_search) + " : " + query +  "\n\n"
                 if start_2 != None and end_2 != None: 
                     to_return +=       "    " +         "Document " +               str(indx) + ": " + "\n" \
-                                +  "        " +       "summary 1: " +      context[start:end] + "\n" \
-                                +  "        " +       "summary 2: " + context[start_2: end_2] + "\n" \
+                                +  "        " +       "Summary 1: " +      context[start:end] + "\n" \
+                                +  "        " +       "Summary 2: " + context[start_2: end_2] + "\n" \
                                 +  "        " +    "Full context: " +                 context + "\n" 
                 else:
                     to_return +=       "    " +         "Document " +               str(indx) + ": " + "\n" \
-                                +  "        " +       "summary 1: " +      context[start:end] + "\n" \
+                                +  "        " +       "Summary 1: " +      context[start:end] + "\n" \
                                 +  "        " +    "Full context: " +                 context + "\n" 
                     
             
@@ -61,12 +61,12 @@ def print_helper(query, results, mode, round_of_search):
                     to_return = "Detailed Content Retrieved for Query No " + str(round_of_search) + " : " +  query + "\n\n"
                 
                 to_return +=    "    " +     "Document " +   str(indx) + ": " + "\n" \
-                          + "        " +        "type_var: " +        type_var + "\n"  \
-                          + "        " +       "score: " +  str(score) + "\n" \
-                          + "        " +      "doc_ID: " + document_id + "\n" \
+                          + "        " +        "Type: " +        type_var + "\n"  \
+                          + "        " +       "Score: " +  str(score) + "\n" \
+                          + "        " +      "Doc_ID: " + document_id + "\n" \
                           + "        " +        "Name: " +        name + "\n" \
                           + "        " + "Institution: " + institution + "\n" \
-                          + "        " +     "context: " +     context + "\n" \
+                          + "        " +"Full Context: " +     context + "\n" \
                             # + "        " + offsets_in_context + " in document\n" \
                             # + "        " + offsets_in_document + " in file\n\n"
 
