@@ -1,6 +1,8 @@
 import retriever as ret
 import corpus_loader as loader
 import reader as r
+from haystack.nodes import TransformersQueryClassifier
+
 
 def print_helper(query, results, mode, round_of_search):
     to_return = ""
@@ -12,7 +14,7 @@ def print_helper(query, results, mode, round_of_search):
         indx = 0
         for item in results:
 
-            if   mode == "succinct":
+            if mode == "succinct":
                 
                 context = item.context
                 offsets_in_context = item.offsets_in_context[0]
@@ -77,10 +79,44 @@ def print_helper(query, results, mode, round_of_search):
                 "======================================================================================================\n======================================================================================================\n\n"
     return to_return
 
+
+def parse_filter(raw_filter):
+    raw_filter.replace(',', '')
+    raw_filter.replace('\n', '')
+    filter_list = raw_filter.split()
+
+    filter_type = "name"
+    if filter_list[0] == "--name":
+        filter_type = "name"
+    elif filter_list[0] == "--institution":
+        filter_type = "institution"
+    
+    filter_content = []
+    for i in range(1, len(filter_list)):
+        filter_content.append(filter_list[i])
+    
+    return filter_type, filter_content
+
+
+def valid_filter(raw_filter):
+    filter_list = raw_filter.split()
+
+    if len(filter_list) <= 1:
+        return False
+    
+    if filter_list[0] != "--name" and filter_list[0] != "--institution":
+        return False
+
+    return True
+
+
 def run_searchEngine(filename):
     print("Loading corpus...")
     document_store = loader.create_documentStore(filename)
-    retriever = ret.Retriever(document_store)
+    elastic_retriever = ret.Retriever(document_store, "ElasticSearch")
+    dense_retriever = ret.Retriever(document_store, "DensePassage")
+    document_store.update_embeddings(dense_retriever.retriever)
+    question_classifier = TransformersQueryClassifier(model_name_or_path="shahrukhx01/bert-mini-finetune-question-detection")
     reader = r.Reader()
 
     print("Corpus loaded! Search engine running...Plz select your mode\n")
@@ -100,6 +136,33 @@ def run_searchEngine(filename):
             if raw_query == "quit":
                 f.close()
                 break
+            
+            # query classification
+            classification = question_classifier.run(query=raw_query)
+            if classification[1] == "output_1":
+                retriever = dense_retriever
+            else:
+                retriever = elastic_retriever
+
+            # taking filters
+            retriever.clear_filter()
+            while True:
+                raw_filter = input("Add filter on faculty name as '--name <NAME1>, <NAME2>, ...' \nor on institution as '--institution <INSTUTITION1>, <INSTITUTION2>, ...' \nEnter 'done' to finish" + \
+                "\nEnter 'clear' to clear filter \n")
+                if raw_filter == "done":
+                    break
+                if raw_filter == "clear":
+                    retriever.clear_filter()
+                    print("All filters are erased.")
+                    continue
+                if not valid_filter(raw_filter):
+                    print("Invalid Filter!")
+                    continue
+
+                filter_type, filter_content = parse_filter(raw_filter)
+                retriever.add_filter(filter_type, filter_content)
+                print("Current filters: ", retriever.filters)
+            
 
             try:
                 candidate_documents = retriever.retrive(5, raw_query)     

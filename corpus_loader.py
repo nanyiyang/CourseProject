@@ -24,8 +24,8 @@ def load_text_corpus(filename):
             meta_dict = {}
             line = line.replace('\n', '')
             features = line.split(',')
-            meta_dict["name"] = features[0]
-            meta_dict["institution"] = features[1]
+            meta_dict["name"] = features[0].lower()
+            meta_dict["institution"] = features[1].lower()
 
         # odd index ==> text body
         else:

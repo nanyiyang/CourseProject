@@ -1,4 +1,5 @@
 from haystack.nodes import ElasticsearchRetriever
+from haystack.nodes import DensePassageRetriever
 
 
 class Retriever:
@@ -6,8 +7,12 @@ class Retriever:
     A retriever class to retrieve text based on queries with dynamic filters
     """
 
-    def __init__(self, document_store):
-        self.retriever = ElasticsearchRetriever(document_store)
+    def __init__(self, document_store, retriever_type):
+        if retriever_type == "ElasticSearch":
+            self.retriever = ElasticsearchRetriever(document_store)
+        else:
+            self.retriever = DensePassageRetriever(document_store)
+
         self.filters = {}
 
     def add_filter(self, filter_name, filter_vals):
