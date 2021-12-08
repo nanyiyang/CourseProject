@@ -81,19 +81,17 @@ def print_helper(query, results, mode, round_of_search):
 
 
 def parse_filter(raw_filter):
-    raw_filter.replace(',', '')
+    # raw_filter.replace(',', '')
     raw_filter.replace('\n', '')
-    filter_list = raw_filter.split()
-
+    filter_list = raw_filter.split(" ", 1)
+    
     filter_type = "name"
     if filter_list[0] == "--name":
         filter_type = "name"
     elif filter_list[0] == "--institution":
         filter_type = "institution"
     
-    filter_content = []
-    for i in range(1, len(filter_list)):
-        filter_content.append(filter_list[i])
+    filter_content = filter_list[1].split("&")
     
     return filter_type, filter_content
 
@@ -106,6 +104,9 @@ def valid_filter(raw_filter):
     
     if filter_list[0] != "--name" and filter_list[0] != "--institution":
         return False
+    if ',' in filter_list or  '.' in filter_list or '!' in filter_list or '@' in filter_list:
+        return False
+
 
     return True
 
@@ -147,8 +148,10 @@ def run_searchEngine(filename):
             # taking filters
             retriever.clear_filter()
             while True:
-                raw_filter = input("Add filter on faculty name as '--name <NAME1>, <NAME2>, ...' \nor on institution as '--institution <INSTUTITION1>, <INSTITUTION2>, ...' \nEnter 'done' to finish" + \
-                "\nEnter 'clear' to clear filter \n")
+                raw_filter = input("Add filter on faculty name and use & to seperate multiple filters as '--name <NAME1>&<NAME2>& ...'" +  "\n" \
+                                    +"Add filter on  institution and use & to seperate '--institution <INSTUTITION1>&<INSTITUTION2>&...'" + "\n" \
+                                    +"Enter 'done' to finish" + "\n"\
+                                    +"Enter 'clear' to clear filter"+"\n")
                 if raw_filter == "done":
                     break
                 if raw_filter == "clear":
