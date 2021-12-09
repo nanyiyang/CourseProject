@@ -176,7 +176,7 @@ def run_searchEngine(filename):
                 continue
             
             # print(candidate_documents)
-            print(results["answers"])
+            # print(results["answers"])
             to_print = None
             # print(candidate_documents)
             if  (Mode == "succinct"):

@@ -18,14 +18,20 @@ def load_text_corpus(filename):
     for i in range(len(lines)):
         line = lines[i]
 
-        # even index ==> attribute line
-        if i % 2 == 0:
+        # first index ==> attribute line
+        if i % 3 == 0:
             entry_dict = {}
             meta_dict = {}
             line = line.replace('\n', '')
             features = line.split(',')
             meta_dict["name"] = features[0].lower()
-            meta_dict["institution"] = features[1].lower()
+
+            if (len(features) >= 2):
+                meta_dict["institution"] = features[1].lower()
+
+        # second index ==> link line
+        elif i % 3 == 1:
+            meta_dict["link"] = line
 
         # odd index ==> text body
         else:
