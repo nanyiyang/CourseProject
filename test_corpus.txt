@@ -1,0 +1,24 @@
+Nancy Amato,UIUC
+link1
+Nancy Amato is a professor in department of computer science
+Lawrence Angrave,UIUC
+link1
+Lawrence Angrave is a computer science professor
+Kris Hauser,UIUC
+link1
+Kris is a computer science professor who graduated from UCB
+Animesh Garg,University of Toronto
+link1
+Animesh Garg is a computer science professor at the University of Toronto
+Dan Block,UIUC
+link1
+Dan Block is a professor from UIUC in the dapartment of computer science
+Maya Catwak,University of Washington
+link1
+Maya Catwak is a computer engineering professor from the University of Washington
+Nancy Wang,Cornell University
+link1
+Nancy Wang is a professor from the Cornell University in the department of agriculture
+Kevin Song,UCLA
+link1
+Kevin Sone is a computer science professor at UCLA
