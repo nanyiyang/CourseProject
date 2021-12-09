@@ -1,3 +1,18 @@
+# Scraper Instructions
+### Installation
+Note that the first two files are included in the repo so download/installation of them may not be necessary
+- Install chromedriver96 from [here](https://chromedriver.storage.googleapis.com/index.html?path=96.0.4664.45/)
+- Download the stanford-ner zip file from [here](https://nlp.stanford.edu/software/CRF-NER.shtml#Download)
+
+- Run the following commands:
+```
+pip install bs4
+pip install nltk
+pip install selenium
+```
+
+
+
 # Search Engine Instructions
 
 ### Install Haystack
