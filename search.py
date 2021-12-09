@@ -192,4 +192,4 @@ def run_searchEngine(filename):
 
 
 if __name__ == '__main__':
-    run_searchEngine("test_corpus.txt")
+    run_searchEngine("uo_output.txt")
