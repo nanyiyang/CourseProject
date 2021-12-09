@@ -1,8 +1,10 @@
 # Scraper Instructions
 ### Installation
+(The scraper was developed with Python 3.5.6 but later version probably shouldn't cause any issues.)
+
 Note that the first two files are included in the repo so download/installation of them may not be necessary
 - Install chromedriver96 from [here](https://chromedriver.storage.googleapis.com/index.html?path=96.0.4664.45/)
-- Download the stanford-ner zip file from [here](https://nlp.stanford.edu/software/CRF-NER.shtml#Download)
+- Download the stanford-ner zip file from [here](https://nlp.stanford.edu/software/CRF-NER.shtml#Download). Extract in the project directory.
 
 - Run the following commands:
 ```
@@ -11,8 +13,28 @@ pip install nltk
 pip install selenium
 ```
 
+### Features
+The primary function of the webscraper as compared to a scraper like that in the MPs was to make it more robust and capable of getting information from more than one website, rather than just being tailored to one website format. Our scraper operates by being given a school's faculty directory, and then attempts to click on links that are recognized as names and subsequently scrape all the text that comes from those links. 
 
+However to get a more robust scraper, we had to relax certain constraints which also led to a few problems:
+- There is sometimes information that is scraped that is irrelevant.
+- The urllib library seems to cause issues with what we assume is protection against too many queries (inconsistently get 500 and 406 error codes)
+- Limitations with the name recognition portion of the scraper can lead to irrelevant links/pages being scraped.
 
+### Usage
+Usage of the scraper is simple and easy to modify. Ensure all packages and requirements (chromedriver and stanford-ner folder) are downloaded and installed. Simply run all cells containing functions (which should be ```find_names()```, ```get_links()```, ```tag_visible()```, ```text_from_html()```, ```scrape_text()```, ```scrape_from_url()```, ```export_data()```)
+
+Fill in your own url/base_url and run the cells that call ```scrape_from_url()``` and ```export_data()``` or create a new cell with the following code:
+```
+url = "https://cs.uoregon.edu/people/faculty"   # put your own url here!
+base_url = 'https://cs.uoregon.edu/'            # put your own url here!
+
+# run the scraper
+names, bio_urls, bios = scrape_from_url(url, base_url)
+
+# export the scraper results to a text file
+export_data(names, bio_urls, bios)
+```
 # Search Engine Instructions
 
 ### Install Haystack
@@ -39,7 +61,7 @@ Once Docker is running, you can run the search engine by running
 
 
 ### Basic Features{Succinct/Detailed mode, Filters, and Query Classifier}
-1. There are succinct mode and detailed mode in our search engine. At beginning of the search process, we will ask you to select the mode you want
+1. There is a succinct mode and a detailed mode in our search engine. At beginning of the search process, the user is asked to select the mode they prefer:
 ````
 Mode = input("Indicate search mode(succinct or detailed): ")
 while (Mode != "succinct" and Mode != "detailed"):
