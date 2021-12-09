@@ -1,3 +1,6 @@
+# YouTube link
+https://youtu.be/wRiY4Wuft04
+
 # Scraper Instructions
 ### Installation
 (The scraper was developed with Python 3.5.6 but later version probably shouldn't cause any issues.)
